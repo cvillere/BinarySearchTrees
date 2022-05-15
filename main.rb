@@ -1,7 +1,5 @@
 class Node
 
-  include comparable
-
   attr_accessor :data, :left_child, :right_child
 
   def initialize
@@ -21,6 +19,20 @@ class Tree
     @root = nil
   end
 
+  def build_tree(input_array, start, finish)
+    sorted_array = input_array.sort
+    uniq_array = sorted_array.uniq
+    return nil if start > finish
+    mid = (start + finish) / 2
+    root = Node.new
+    root.data = uniq_array[mid]
+    root.left_child = build_tree(input_array, start, mid - 1)
+    root.right_child = build_tree(input_array, mid + 1, finish)
+    return root
+  end
+
+
+=begin
   def build_tree(input_array)
     #sort the list
     sorted_array = input_array.sort
@@ -31,14 +43,18 @@ class Tree
     n.times do |i|
       new_node = Node.new
       new_node.data = i
-      if self.root == nil
-        self.root = new_node.data
-      elsif
-
-
-    #turn it into a balance binary tree 
-
-    #GOAL: return initial or level-0 root node
+      if @root == nil
+        @root = new_node.data
+      elsif @root.data > new_node.data
+        @root.right = new_node
+      else
+        @root.left = new_node
+      end
+    end
+    @root
   end
+    #turn it into a balance binary tree 
+    #GOAL: return initial or level-0 root node
+=end
 
 end
