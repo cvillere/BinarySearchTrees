@@ -31,6 +31,18 @@ class Tree
     return root
   end
 
+  def insert(root, key)
+    if root == nil
+      root = Node.new
+      root.data = key
+    elsif root.data == key
+      return root
+    elsif root.val < key
+      root.right_child = insert(root.right_child, key)
+    else
+      root.left_child = insert(right.left_child, key)
+    end
+  end
 
 =begin
   def build_tree(input_array)
