@@ -31,17 +31,37 @@ class Tree
     return root
   end
 
-  def insert(root, key)
+  def insert(root, data)
     if root == nil
       root = Node.new
-      root.data = key
-    elsif root.data == key
+      root.data = data
+    elsif root.data == data
       return root
-    elsif root.val < key
-      root.right_child = insert(root.right_child, key)
+    elsif root.val < data
+      root.right_child = insert(root.right_child, data)
     else
-      root.left_child = insert(right.left_child, key)
+      root.left_child = insert(right.left_child, data)
     end
+  end
+
+  
+
+  def delete(root, data)
+    return root if root == nil
+    if data < root.data
+      root.left_child = delete(root.left_child, data)
+    elsif data > root.data
+      root.right_child = delete(root.right_child, data)
+    else
+      if root.left_child == nil
+        temp = root.right_child
+        root = nil
+        return temp
+      elsif root.right_child == nil
+        temp = root.left
+        root = nil
+        return temp
+
   end
 
 =begin
