@@ -44,7 +44,14 @@ class Tree
     end
   end
 
-  
+  def min_value_node(node)
+    current = node
+    while current.left_child != nil 
+      current = current.left
+    end
+    return current
+  end
+
 
   def delete(root, data)
     return root if root == nil
@@ -61,7 +68,18 @@ class Tree
         temp = root.left
         root = nil
         return temp
+      end
+      temp = minValueNode(root.right_child)
+      root.key = temp.key
+      root.right_child = delete(root.right, temp.key)
+    end
+    return root
+  end
 
+  def search(root, data)
+    return root if root == nil || root.data == data
+    return search(root.right_child, data) if root.data < data
+    return search(root.left_child, data)
   end
 
 =begin
